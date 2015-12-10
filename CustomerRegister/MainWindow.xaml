@@ -1,0 +1,178 @@
+﻿<Window x:Class="CustomerRegister.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomerRegister"
+        xmlns:model="clr-namespace:CustomerRegister.Model"
+        mc:Ignorable="d"
+        Title="Customer Register 3000RX" Height="540" Width="900" Icon="images/Users-icon.png" WindowStartupLocation="CenterScreen">
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0"  Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Customer Type" Grid.Row="0" Grid.Column="0"/>
+            <Label Content="Company Name" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="First Name" Grid.Row="2" Grid.Column="0"/>
+            <Label Content="Last Name" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="Birthdate" Grid.Row="4" Grid.Column="0"/>
+            <Label Content="Street Address" Grid.Row="5" Grid.Column="0"/>
+            <Label Content="Zip Code" Grid.Row="6" Grid.Column="0"/>
+            <Label Content="City" Grid.Row="7" Grid.Column="0"/>
+            <Label Content="Email" Grid.Row="8" Grid.Column="0"/>
+            <Label Content="Phone" Grid.Row="9" Grid.Column="0"/>
+            <Label Content="Newsletter" Grid.Row="10" Grid.Column="0"/>
+            <Label Content="Notes" Grid.Row="11" Grid.Column="0"/>
+            
+            <!--Customer Type-->
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <model:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+                </Grid.Resources>
+                <RadioButton Grid.Column="0" VerticalAlignment="Center" Name="Private_Rbtn" IsChecked="{Binding Path=Customer.Type, 
+                                        Converter={StaticResource EnumToBooleanConverter}, 
+                                        ConverterParameter={x:Static model:CustomerType.Private}}"
+                             HorizontalAlignment="Right" Content="Private" Checked="Rbtn_Checked" />
+                <RadioButton Grid.Column="1" VerticalAlignment="Center" Checked="Rbtn_Checked" Name="Company_Rbtn" IsChecked="{Binding Path=Customer.Type, 
+                                        Converter={StaticResource EnumToBooleanConverter}, 
+                                        ConverterParameter={x:Static model:CustomerType.Company}}" 
+                             HorizontalAlignment="Right"  Content="Company"  />
+            </Grid>
+            
+            <!--CompanyName-->
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Customer.CompanyName}" VerticalAlignment="Center" Name="CompanyNameTextBox"/>
+
+            <!--FirstName-->
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Customer.FirstName}" VerticalAlignment="Center"/>
+
+            <!--LastName-->
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Customer.LastName}" VerticalAlignment="Center"/>
+
+            <!--Birthdate-->
+            <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Customer.BirthDate}" VerticalAlignment="Center" />
+
+            <!--StreetAddress-->
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Customer.Address}"  VerticalAlignment="Center"/>
+
+            <!--ZipCode-->
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Customer.ZipCode}" VerticalAlignment="Center"/>
+
+            <!--City-->
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Customer.City}" VerticalAlignment="Center"/>
+
+            <!--Email-->
+            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Customer.Email}" VerticalAlignment="Center"/>
+
+            <!--Phone-->
+            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Customer.Phone}" VerticalAlignment="Center"/>
+
+            <!--Newsletter-->
+            <CheckBox Grid.Row="10" Name="news_checkbox" Grid.Column="1" IsChecked="{Binding Customer.SubscribedNewsLetter}" VerticalAlignment="Center" 
+                      Content="Subscribe to newsletter"/>
+
+            <!--Notes-->
+            <TextBox Grid.Row="11" Grid.Column="1" TextWrapping="Wrap" 
+                     AcceptsReturn="True" MinLines="5" Text="{Binding Customer.Notes}"/>
+
+            <Grid Grid.Row="12" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Margin="0 10 5 5" Grid.Row="0" ToolTip="Create" Click="Create_btn_Click">
+                    <Button.Content>
+                        <Image Source="/images/Add-group-icon.png" Width="40"></Image>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="1" Background="Transparent" Margin="5 10 0 5"  BorderBrush="Transparent" Grid.Row="0" ToolTip="Delete" Click="Delete_btn_Click">
+                    <Button.Content>
+                        <Image Source="/images/Delete-group-icon.png" Width="40"></Image>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Margin="0 5 5 10" Grid.Row="1" ToolTip="Update" Click="Update_btn_Click" >
+                    <Button.Content>
+                        <Image Source="/images/Actions-edit-redo-icon.png" Width="40"></Image>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Margin="5 5 0 10" Grid.Row="1" ToolTip="Clear" Name="Clear_btn" Click="Clear_btn_Click">
+                    <Button.Content>
+                        <Image Source="/images/Clear-icon.png" Width="40"></Image>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1"   Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0 0 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label HorizontalAlignment="Right" Grid.Column="0" Content="Search:"/>
+
+                <RadioButton Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Center" Content="Phone" Name="Search_Phone_Rbtn" GroupName="SearchRbtn" IsChecked="True"/>
+                <RadioButton Grid.Column="2" VerticalAlignment="Center" Content="Email" Name="Search_Email_Rbtn"  GroupName="SearchRbtn" Margin="64,0,0,0" />
+
+                <TextBox VerticalAlignment="Center" Grid.Column="3" Name="SearchTxtBox" TextChanged="SearchTxtBox_TextChanged"/>
+            </Grid>
+            
+            <ListView Grid.Row="1" ItemsSource="{Binding List}" Name="CustomerListView" MouseDoubleClick="ListView_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+                        <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+                        <GridViewColumn Header="Company" DisplayMemberBinding="{Binding CompanyName}"/>
+                        <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
+                        <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+        </Grid>
+        
+    </Grid>
+</Window>
